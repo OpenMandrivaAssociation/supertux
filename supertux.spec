@@ -1,6 +1,6 @@
 %define name	supertux
 %define version 0.3.0
-%define rel	1
+%define rel	2
 %define release	%mkrel %rel
 %define Summary Classic 2D jump 'n run sidescroller with Tux
 
@@ -11,6 +11,7 @@ Source0:	http://download.berlios.de/supertux/%{name}-%{version}.tar.bz2
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
+Patch0:		supertux-0.3.0-fix-menu-path.patch
 License:	GPL
 Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
@@ -27,6 +28,7 @@ a similar style like the original SuperMario games.
 
 %prep
 %setup -q
+%patch0 -p1 -b .path
 
 %build
 %configure	--bindir=%{_gamesbindir} \
