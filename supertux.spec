@@ -20,7 +20,6 @@ BuildRequires:	jam
 BuildRequires:	SDL_mixer-devel SDL_image-devel MesaGLU-devel
 BuildRequires:	oggvorbis-devel openal-devel physfs-devel zlib-devel 
 BuildRequires:	desktop-file-utils
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 SuperTux is a classic 2D jump 'n run sidescroller game in
