@@ -1,6 +1,6 @@
 %define name	supertux
 %define version 0.3.0
-%define rel	2
+%define rel	3
 %define release	%mkrel %rel
 %define Summary Classic 2D jump 'n run sidescroller with Tux
 
@@ -12,7 +12,7 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Patch0:		supertux-0.3.0-fix-menu-path.patch
-License:	GPL
+License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
 Summary:	%{Summary}
@@ -43,17 +43,6 @@ mv %{buildroot}%{_gamesdatadir}/pixmaps %{buildroot}%{_datadir}/
 mv %{buildroot}%{_gamesdatadir}/doc %{buildroot}%{_datadir}/
 rm %{buildroot}%{_docdir}/%{name}-%{version}/{COPYING,INSTALL}
 
-install -d $RPM_BUILD_ROOT%{_menudir}
-cat <<EOF >$RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}):command="%{_gamesbindir}/%{name}" \
-		  icon=%{name}.png \
-		  needs="x11" \
-		  section="More Applications/Games/Arcade" \
-		  title="SuperTux"\
-		  longtitle="%{Summary}"\
-		  xdg="true"					
-EOF
-
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="Game" \
@@ -78,7 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README WHATSNEW.txt
 %{_gamesdatadir}/%{name}
-%{_menudir}/%{name}
 %{_datadir}/pixmaps/%{name}.xpm
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}*.png
@@ -87,5 +75,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/supertux.png
 %defattr(755,root,root,755)
 %{_gamesbindir}/%{name}
-
-
