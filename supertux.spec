@@ -27,10 +27,10 @@ a similar style like the original SuperMario games.
 
 %prep
 %setup -q
-%patch0 -p1 -b .path
+%patch0 -p0 -b .path
 
 %build
-%configure	--bindir=%{_gamesbindir} \
+%configure2_5x	--bindir=%{_gamesbindir} \
 		--datadir=%{_gamesdatadir} \
 		--disable-debug
 jam
