@@ -39,6 +39,9 @@ jam
 %install
 rm -rf $RPM_BUILD_ROOT
 DESTDIR=%{buildroot} jam install
+# (blino) required data files not automatically installed by 0.3.1
+install -m644 data/camera.cfg data/credits.txt %{buildroot}%{_gamesdatadir}/%{vname}
+
 mv %{buildroot}%{_gamesdatadir}/applications %{buildroot}%{_datadir}/
 mv %{buildroot}%{_gamesdatadir}/pixmaps %{buildroot}%{_datadir}/
 rm -fr %{buildroot}%{_gamesdatadir}/doc/%{vname}-%{version}
