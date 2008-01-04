@@ -40,8 +40,7 @@ rm -rf $RPM_BUILD_ROOT
 DESTDIR=%{buildroot} jam install
 mv %{buildroot}%{_gamesdatadir}/applications %{buildroot}%{_datadir}/
 mv %{buildroot}%{_gamesdatadir}/pixmaps %{buildroot}%{_datadir}/
-mv %{buildroot}%{_gamesdatadir}/doc %{buildroot}%{_datadir}/
-rm -fr %{buildroot}%{_datadir}/doc/%{name}-%{version}
+rm -fr %{buildroot}%{_gamesdatadir}/doc/%{name}-%{version}
 
 install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
