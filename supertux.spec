@@ -13,6 +13,7 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Patch0:		supertux-0.3.1-fix-menu-path.patch
+Patch1:		supertux-0.3.1-gcc43.patch
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
@@ -29,6 +30,7 @@ a similar style like the original SuperMario games.
 %prep
 %setup -q
 %patch0 -p1 -b .path
+%patch1 -p1 -b .gcc43
 
 %build
 %configure2_5x	--bindir=%{_gamesbindir} \
