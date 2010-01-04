@@ -1,8 +1,7 @@
 %define name	supertux
 %define vname	%{name}2
 %define version 0.3.1
-%define rel	4
-%define release	%mkrel %rel
+%define release	%mkrel 5
 %define Summary Classic 2D jump 'n run sidescroller with Tux
 
 Name:		%{name}
@@ -20,6 +19,7 @@ Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
 Summary:	%{Summary}
 BuildRequires:	jam
+BuildRequires:	libcurl-devel
 BuildRequires:	SDL_mixer-devel SDL_image-devel MesaGLU-devel
 BuildRequires:	oggvorbis-devel openal-devel physfs-devel zlib-devel 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
