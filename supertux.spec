@@ -29,8 +29,6 @@ a similar style like the original SuperMario games.
 %setup -q
 
 %build
-mkdir build
-cd build
 %cmake
 %make 
 
