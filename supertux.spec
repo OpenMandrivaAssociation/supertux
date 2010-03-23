@@ -1,7 +1,7 @@
 %define name	supertux
 %define vname	%{name}2
 %define version 0.3.3
-%define release	%mkrel 2
+%define release	%mkrel 3
 %define Summary Classic 2D jump n run sidescroller with Tux
 
 Name:		%{name}
@@ -11,6 +11,7 @@ Source0:	http://download.berlios.de/supertux/%{name}-%{version}.tar.bz2
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
+Patch0:		supertux-0.3.3-use-system-squirrel.patch
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
@@ -19,6 +20,7 @@ BuildRequires:	cmake
 BuildRequires:	libcurl-devel
 BuildRequires:	SDL_mixer-devel SDL_image-devel MesaGLU-devel libglew-devel
 BuildRequires:	oggvorbis-devel openal-devel physfs-devel zlib-devel boost-devel
+BuildRequires:	libsquirrel-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -27,6 +29,9 @@ a similar style like the original SuperMario games.
 
 %prep
 %setup -q
+%apply_patches
+#gw FIXME: don't hardcode /usr/lib but use the cmake blessed way
+sed -i "s^/usr/lib^%_libdir^" CMakeLists.txt
 
 %build
 %cmake
