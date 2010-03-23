@@ -30,8 +30,6 @@ a similar style like the original SuperMario games.
 %prep
 %setup -q
 %apply_patches
-#gw FIXME: don't hardcode /usr/lib but use the cmake blessed way
-sed -i "s^/usr/lib^%_libdir^" CMakeLists.txt
 
 %build
 %cmake
