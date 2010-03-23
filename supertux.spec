@@ -17,7 +17,7 @@ URL:		http://supertux.berlios.de/
 Summary:	%{Summary}
 BuildRequires:	cmake
 BuildRequires:	libcurl-devel
-BuildRequires:	SDL_mixer-devel SDL_image-devel MesaGLU-devel
+BuildRequires:	SDL_mixer-devel SDL_image-devel MesaGLU-devel libglew-devel
 BuildRequires:	oggvorbis-devel openal-devel physfs-devel zlib-devel boost-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
