@@ -31,10 +31,8 @@ a similar style like the original SuperMario games.
 %build
 mkdir build
 cd build
-cmake \
-	-D CMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
-	..
-make 
+%cmake	..
+%make 
 
 
 %install
