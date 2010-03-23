@@ -31,7 +31,7 @@ a similar style like the original SuperMario games.
 %build
 mkdir build
 cd build
-%cmake	..
+%cmake
 %make 
 
 
