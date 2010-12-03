@@ -1,7 +1,7 @@
 %define name	supertux
 %define vname	%{name}2
 %define version 0.3.3
-%define release	%mkrel 3
+%define release	%mkrel 4
 %define Summary Classic 2D jump n run sidescroller with Tux
 
 Name:		%{name}
