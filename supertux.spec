@@ -12,6 +12,7 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Patch0:		supertux-0.3.3-use-system-squirrel.patch
+Patch1:		supertux-0.3.3-gcc46.patch
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://supertux.berlios.de/
@@ -35,11 +36,9 @@ a similar style like the original SuperMario games.
 %cmake
 %make 
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
-cd build
-DESTDIR=%{buildroot} make install 
+%makeinstall_std -C build
 # (blino) required data files not automatically installed by 0.3.1
 # install -m644 data/camera.cfg data/credits.txt %{buildroot}%{_gamesdatadir}/%{vname}
 
