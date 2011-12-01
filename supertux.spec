@@ -37,7 +37,7 @@ a similar style like the original SuperMario games.
 %make 
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std -C build
 # (blino) required data files not automatically installed by 0.3.1
 # install -m644 data/camera.cfg data/credits.txt %{buildroot}%{_gamesdatadir}/%{vname}
@@ -46,9 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 # mv %{buildroot}%{_gamesdatadir}/pixmaps %{buildroot}%{_datadir}/
 rm -fr %{buildroot}%{_gamesdatadir}/doc/%{vname}-%{version}
 
-install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 %if %mdkversion < 200900
 %post
@@ -61,7 +61,7 @@ install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
