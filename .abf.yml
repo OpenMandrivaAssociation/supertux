@@ -1,5 +1,2 @@
 sources:
-  "supertux-0.3.3.tar.bz2:"	f89214fd5d997b62753fbba7e1d089d81513f2de
-  "supertux-16x16.png:"	6ebb34586c4e1c93ae36c5ffc48d31198646f973
-  "supertux-32x32.png:"	59d4d477ca2423957c41b257d86dd262fd6b6c53
-  "supertux-48x48.png:"	0634a1fb0672e3c9b81898fbb482dc093547bfc6
+  "supertux-0.3.3.tar.bz2": f89214fd5d997b62753fbba7e1d089d81513f2de
