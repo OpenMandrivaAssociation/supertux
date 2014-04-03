@@ -1,5 +1,6 @@
---- supertux-0.3.3/CMakeLists.txt.0000~	2010-03-01 13:40:55.000000000 +0100
-+++ supertux-0.3.3/CMakeLists.txt	2011-05-06 19:28:39.839275377 +0200
+diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
+--- supertux-0.3.4.orig/CMakeLists.txt	2014-04-03 22:13:02.000000000 +0400
++++ supertux-0.3.4/CMakeLists.txt	2014-04-03 22:14:06.000000000 +0400
 @@ -106,6 +106,23 @@
  #INCLUDE_DIRECTORIES(${ICONV_INCLUDE_DIR})
  #LINK_LIBRARIES(${ICONV_LIBRARY})
@@ -23,18 +24,18 @@
 +
  ## Find revision of WC
  MARK_AS_ADVANCED(SVNVERSION_EXECUTABLE)
- FIND_PROGRAM(SVNVERSION_EXECUTABLE svnversion)
-@@ -149,17 +166,17 @@
+ ##FIND_PROGRAM(SVNVERSION_EXECUTABLE svnversion)
+@@ -150,17 +167,17 @@
  
- ## Also execute instructions in src/squirrel/CMakeLists.txt
+ ## Also execute instructions in external/squirrel/CMakeLists.txt
  
--ADD_SUBDIRECTORY(external/squirrel)
-+#ADD_SUBDIRECTORY(external/squirrel)
+-ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
++#ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
  
  ## Add squirrel lib dir to search path
  
--LINK_DIRECTORIES(external/squirrel)
-+#LINK_DIRECTORIES(external/squirrel)
+-LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
++#LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
  
  ## Some additional include paths
  
@@ -45,7 +46,7 @@
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/tinygettext/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/findlocale/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/obstack/)
-@@ -333,7 +350,7 @@
+@@ -341,7 +358,7 @@
  
  ## Link supertux binary with squirrel and other libraries
  
