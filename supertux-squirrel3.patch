@@ -1,0 +1,11 @@
+--- supertux-0.3.4/src/scripting/squirrel_util.cpp.orig	2014-10-11 10:22:01.810012739 +0100
++++ supertux-0.3.4/src/scripting/squirrel_util.cpp	2014-10-11 10:22:10.930012067 +0100
+@@ -89,7 +89,7 @@
+   sq_pop(global_vm, 1);
+ 
+   // register print function
+-  sq_setprintfunc(global_vm, printfunc);
++  sq_setprintfunc(global_vm, printfunc, NULL);
+   // register default error handlers
+   sqstd_seterrorhandlers(global_vm);
+ 

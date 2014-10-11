@@ -10,6 +10,7 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Patch0:		supertux-0.3.4-use-system-squirrel.patch
+Patch1:		supertux-squirrel3.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
