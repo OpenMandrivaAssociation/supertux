@@ -1,16 +1,17 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.3.4
-Release:	6
+Version:	0.3.5a
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.berlios.de/
-Source0:	http://download.berlios.de/supertux/%{name}-%{version}.tar.bz2
+Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/supertux-%{version}.tar.bz2
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
+%if %mdvver >= 201500
 Patch0:		supertux-0.3.4-use-system-squirrel.patch
-Patch1:		supertux-squirrel3.patch
+%endif
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
@@ -18,9 +19,11 @@ BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(openal)
-BuildRequires:	pkgconfig(SDL_image)
-BuildRequires:	pkgconfig(SDL_mixer)
+BuildRequires:	pkgconfig(SDL2_image)
+BuildRequires:	pkgconfig(SDL2_mixer)
+%if %mdvver >= 201500
 BuildRequires:	pkgconfig(squirrel)
+%endif
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 
@@ -30,13 +33,14 @@ a similar style like the original SuperMario games.
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING INSTALL README WHATSNEW.txt
+%doc LICENSE INSTALL.md README.md WHATSNEW.txt
 %{_gamesdatadir}/%{name}2
 %{_datadir}/pixmaps/%{name}.xpm
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}*.png
 %{_miconsdir}/%{name}*.png
 %{_datadir}/applications/%{name}2.desktop
+%{_datadir}/appdata/supertux2.appdata.xml
 %{_datadir}/pixmaps/supertux.png
 %attr(755,root,root) %{_gamesbindir}/%{name}2
 
@@ -47,7 +51,11 @@ a similar style like the original SuperMario games.
 %apply_patches
 
 %build
-%cmake
+%cmake \
+%if %mdvver < 201500
+	-DBUILD_SHARED_LIBS=OFF
+%endif
+
 %make
 
 %install

@@ -23,8 +23,8 @@ diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
 +
 +
  ## Find revision of WC
- MARK_AS_ADVANCED(SVNVERSION_EXECUTABLE)
- ##FIND_PROGRAM(SVNVERSION_EXECUTABLE svnversion)
+ MARK_AS_ADVANCED(GIT_EXECUTABLE)
+ FIND_PROGRAM(GIT_EXECUTABLE git)
 @@ -150,17 +167,17 @@
  
  ## Also execute instructions in external/squirrel/CMakeLists.txt
@@ -43,15 +43,15 @@ diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/src/)
 -include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/include/)
 +#include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/include/)
- include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/tinygettext/)
+ include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/tinygettext/include/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/findlocale/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/obstack/)
-@@ -341,7 +358,7 @@
- 
- ## Link supertux binary with squirrel and other libraries
+@@ -416,7 +416,7 @@
+ TARGET_LINK_LIBRARIES(supertux2 ${SDL2_LIBRARIES})
+ TARGET_LINK_LIBRARIES(supertux2 ${SDL2IMAGE_LIBRARIES})
  
 -TARGET_LINK_LIBRARIES(supertux2 squirrel)
 +TARGET_LINK_LIBRARIES(supertux2 ${SQUIRRELL_LIB} ${SQUIRRELL_STDLIB})
- TARGET_LINK_LIBRARIES(supertux2 ${SDL_LIBRARY})
- TARGET_LINK_LIBRARIES(supertux2 ${SDLIMAGE_LIBRARY})
  TARGET_LINK_LIBRARIES(supertux2 ${OPENAL_LIBRARY})
+ TARGET_LINK_LIBRARIES(supertux2 ${OGGVORBIS_LIBRARIES})
+ TARGET_LINK_LIBRARIES(supertux2 ${PHYSFS_LIBRARY})
