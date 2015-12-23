@@ -1,6 +1,6 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.3.5a
+Version:	0.4.0
 Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
@@ -10,8 +10,10 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 %if %mdvver >= 201500
-Patch0:		supertux-0.3.4-use-system-squirrel.patch
+Patch0:		supertux-0.4.0-use-system-squirrel.patch
 %endif
+Patch1:		supertux-0.4.0-tinygettext-subproject.patch
+Patch2:		supertux-0.4.0-tinygettext-subproject-install.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
@@ -33,7 +35,7 @@ a similar style like the original SuperMario games.
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE INSTALL.md README.md WHATSNEW.txt
+%doc LICENSE.txt INSTALL.md README.md NEWS.md
 %{_gamesdatadir}/%{name}2
 %{_datadir}/pixmaps/%{name}.xpm
 %{_iconsdir}/%{name}.png
@@ -52,9 +54,7 @@ a similar style like the original SuperMario games.
 
 %build
 %cmake \
-%if %mdvver < 201500
 	-DBUILD_SHARED_LIBS=OFF
-%endif
 
 %make
 
@@ -63,6 +63,10 @@ a similar style like the original SuperMario games.
 
 rm -fr %{buildroot}%{_gamesdatadir}/doc/%{name}2-%{version}
 rm -fr %{buildroot}%{_docdir}/supertux2
+
+%if %mdvver < 201500
+rm -f %{buildroot}%{_libdir}/libsquirrel.a
+%endif
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
