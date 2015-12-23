@@ -1,7 +1,6 @@
-diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
---- supertux-0.3.4.orig/CMakeLists.txt	2014-04-03 22:13:02.000000000 +0400
-+++ supertux-0.3.4/CMakeLists.txt	2014-04-03 22:14:06.000000000 +0400
-@@ -106,6 +106,23 @@
+--- supertux-0.4.0/CMakeLists.txt.orig	2015-12-23 21:09:10.247427695 +0000
++++ supertux-0.4.0/CMakeLists.txt	2015-12-23 21:11:55.423440088 +0000
+@@ -172,6 +172,22 @@
  #INCLUDE_DIRECTORIES(${ICONV_INCLUDE_DIR})
  #LINK_LIBRARIES(${ICONV_LIBRARY})
  
@@ -21,13 +20,12 @@ diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
 +  message (FATAL_ERROR "squirrel libraries not found")
 +endif()
 +
-+
- ## Find revision of WC
- MARK_AS_ADVANCED(GIT_EXECUTABLE)
- FIND_PROGRAM(GIT_EXECUTABLE git)
-@@ -150,17 +167,17 @@
- 
- ## Also execute instructions in external/squirrel/CMakeLists.txt
+ IF(EXISTS "${CMAKE_SOURCE_DIR}/.git")
+ 	## Find revision of WC
+ 	MARK_AS_ADVANCED(GIT_EXECUTABLE)
+@@ -224,12 +240,12 @@
+   message(FATAL_ERROR "squirrel submodule is not checked out or ${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/CMakeLists.txt is missing")
+ ENDIF()
  
 -ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
 +#ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
@@ -35,9 +33,13 @@ diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
  ## Add squirrel lib dir to search path
  
 -LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
+-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/external/squirrel)
 +#LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
++#INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/external/squirrel)
  
- ## Some additional include paths
+ ## Also execute instructions in external/tinygettext/CMakeLists.txt
+ 
+@@ -248,7 +264,7 @@
  
  include_directories (${CMAKE_BINARY_DIR}/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/src/)
@@ -46,12 +48,12 @@ diff -Naur supertux-0.3.4.orig/CMakeLists.txt supertux-0.3.4/CMakeLists.txt
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/tinygettext/include/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/findlocale/)
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/obstack/)
-@@ -416,7 +416,7 @@
- TARGET_LINK_LIBRARIES(supertux2 ${SDL2_LIBRARIES})
- TARGET_LINK_LIBRARIES(supertux2 ${SDL2IMAGE_LIBRARIES})
+@@ -470,7 +486,7 @@
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SDL2_LIBRARIES})
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SDL2IMAGE_LIBRARIES})
  
--TARGET_LINK_LIBRARIES(supertux2 squirrel)
-+TARGET_LINK_LIBRARIES(supertux2 ${SQUIRRELL_LIB} ${SQUIRRELL_STDLIB})
- TARGET_LINK_LIBRARIES(supertux2 ${OPENAL_LIBRARY})
- TARGET_LINK_LIBRARIES(supertux2 ${OGGVORBIS_LIBRARIES})
- TARGET_LINK_LIBRARIES(supertux2 ${PHYSFS_LIBRARY})
+-TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC squirrel)
++TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SQUIRRELL_LIB} ${SQUIRRELL_STDLIB})
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC tinygettext)
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${OPENAL_LIBRARY})
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${OGGVORBIS_LIBRARIES})

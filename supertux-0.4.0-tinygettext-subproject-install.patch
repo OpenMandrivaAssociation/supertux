@@ -1,0 +1,43 @@
+From 90c79b5184a9276d978b7ec7024c247baeaf6de4 Mon Sep 17 00:00:00 2001
+From: Jacob Burroughs <maths22@gmail.com>
+Date: Tue, 22 Dec 2015 08:36:30 -0600
+Subject: [PATCH] Prevent install of unnecessary files when built as subproject
+
+---
+ CMakeLists.txt | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e9c17cf..1f58669 100644
+--- a/external/tinygettext/CMakeLists.txt
++++ b/external/tinygettext/CMakeLists.txt
+@@ -204,13 +204,21 @@ set(LIB_SUBDIR "lib${LIB_SUFFIX}"
+ ## prepare tinygettext.pc
+ configure_file(tinygettext.pc.in tinygettext.pc @ONLY)
+ 
+-install(TARGETS tinygettext
+-    RUNTIME DESTINATION bin
+-	ARCHIVE DESTINATION ${LIB_SUBDIR}
+-	LIBRARY DESTINATION ${LIB_SUBDIR})
+-install(FILES ${TINYGETTEXT_HEADERS}
+-	DESTINATION include/tinygettext)
+-install(FILES ${tinygettext_BINARY_DIR}/tinygettext.pc
+-	DESTINATION ${LIB_SUBDIR}/pkgconfig)
++IF(TINYGETTEXT_IS_SUBPROJECT)
++	IF(BUILD_SHARED_LIBS)
++		install(TARGETS tinygettext
++			RUNTIME DESTINATION bin
++			LIBRARY DESTINATION ${LIB_SUBDIR}/supertux2)
++	ENDIF()
++ELSE()
++	install(TARGETS tinygettext
++		RUNTIME DESTINATION bin
++		ARCHIVE DESTINATION ${LIB_SUBDIR}
++		LIBRARY DESTINATION ${LIB_SUBDIR})
++	install(FILES ${TINYGETTEXT_HEADERS}
++		DESTINATION include/tinygettext)
++	install(FILES ${tinygettext_BINARY_DIR}/tinygettext.pc
++		DESTINATION ${LIB_SUBDIR}/pkgconfig)
++ENDIF()
+ 
+ # EOF #
