@@ -1,19 +1,19 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.4.0
-Release:	2
+Version:	0.5.1
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
-Url:		http://supertux.berlios.de/
-Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/supertux-%{version}.tar.bz2
+Url:		http://supertux.github.io/
+Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/SuperTux-v%{version}-Source.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 %if %mdvver >= 201500
-Patch0:		supertux-0.4.0-use-system-squirrel.patch
+#Patch0:		supertux-0.4.0-use-system-squirrel.patch
 %endif
-Patch1:		supertux-0.4.0-tinygettext-subproject.patch
-Patch2:		supertux-0.4.0-tinygettext-subproject-install.patch
+#Patch1:		supertux-0.4.0-tinygettext-subproject.patch
+#Patch2:		supertux-0.4.0-tinygettext-subproject-install.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
@@ -28,6 +28,8 @@ BuildRequires:	pkgconfig(squirrel)
 %endif
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	doxygen
+BuildRequires:	ninja
 
 %description
 SuperTux is a classic 2D jump 'n run sidescroller game in
@@ -49,12 +51,13 @@ a similar style like the original SuperMario games.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
+%setup -qn SuperTux-v%{version}-Source
 %apply_patches
 
 %build
 %cmake \
-	-DBUILD_SHARED_LIBS=OFF
+	-DBUILD_SHARED_LIBS=OFF \
+	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 
 %make
 

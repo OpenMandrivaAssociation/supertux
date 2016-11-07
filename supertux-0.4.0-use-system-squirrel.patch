@@ -1,59 +1,58 @@
---- supertux-0.4.0/CMakeLists.txt.orig	2015-12-23 21:09:10.247427695 +0000
-+++ supertux-0.4.0/CMakeLists.txt	2015-12-23 21:11:55.423440088 +0000
-@@ -172,6 +172,22 @@
- #INCLUDE_DIRECTORIES(${ICONV_INCLUDE_DIR})
- #LINK_LIBRARIES(${ICONV_LIBRARY})
+--- SuperTux-v0.5.1-Source/CMakeLists.txt.omv~	2016-11-07 12:21:16.846545835 +0100
++++ SuperTux-v0.5.1-Source/CMakeLists.txt	2016-11-07 12:27:59.938570499 +0100
+@@ -318,6 +318,22 @@ endif()
+ INCLUDE(ConfigureChecks)
  
-+find_library(SQUIRRELL_LIB squirrel
-+             PATH_SUFFIXES squirrel )
-+find_library(SQUIRRELL_STDLIB sqstdlib
-+             PATH_SUFFIXES squirrel )
-+find_path(SQUIRREL_INCLUDE_DIR squirrel.h PATH_SUFFIXES squirrel)
-+INCLUDE_DIRECTORIES(${SQUIRREL_INCLUDE_DIR})
+ 
++OPTION(USE_SYSTEM_SQUIRREL "Use system squirrel libraries" ON)
++if(USE_SYSTEM_SQUIRREL)
++	find_library(SQUIRRELL_LIB squirrel PATH_SUFFIXES squirrel)
++	find_library(SQUIRRELL_STDLIB sqstdlib PATH_SUFFIXES squirrel)
++	find_path(SQUIRREL_INCLUDE_DIR squirrel.h PATH_SUFFIXES squirrel)
++	INCLUDE_DIRECTORIES(${SQUIRREL_INCLUDE_DIR})
 +
-+if (SQUIRRELL_LIB AND SQUIRRELL_STDLIB)
-+  message (STATUS "SQUIRRELL_LIB    = ${SQUIRRELL_LIB}")
-+  message (STATUS "SQUIRRELL_STDLIB = ${SQUIRRELL_STDLIB}")
++	if (SQUIRRELL_LIB AND SQUIRRELL_STDLIB)
++		message (STATUS "SQUIRRELL_LIB    = ${SQUIRRELL_LIB}")
++		message (STATUS "SQUIRRELL_STDLIB = ${SQUIRRELL_STDLIB}")
++	else()
++		message (STATUS "SQUIRRELL_LIB    = ${SQUIRRELL_LIB}")
++		message (STATUS "SQUIRRELL_STDLIB = ${SQUIRRELL_STDLIB}")
++		message (FATAL_ERROR "squirrel libraries not found")
++	endif()
 +else()
-+  message (STATUS "SQUIRRELL_LIB    = ${SQUIRRELL_LIB}")
-+  message (STATUS "SQUIRRELL_STDLIB = ${SQUIRRELL_STDLIB}")
-+  message (FATAL_ERROR "squirrel libraries not found")
-+endif()
-+
- IF(EXISTS "${CMAKE_SOURCE_DIR}/.git")
- 	## Find revision of WC
- 	MARK_AS_ADVANCED(GIT_EXECUTABLE)
-@@ -224,12 +240,12 @@
-   message(FATAL_ERROR "squirrel submodule is not checked out or ${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/CMakeLists.txt is missing")
+ ## Also build external/squirrel
+ 
+ IF(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/CMakeLists.txt)
+@@ -352,6 +368,9 @@ ELSE()
  ENDIF()
  
--ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
-+#ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
+ INCLUDE_DIRECTORIES(SYSTEM ${SQUIRREL_PREFIX}/include)
++set(SQUIRREL_LIB squirrel_lib)
++set(SQUIRREL_STDLIB sqstdlib_lib)
++endif()
  
- ## Add squirrel lib dir to search path
+ ## Also build external/tinygettext
  
--LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
--INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/external/squirrel)
-+#LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel)
-+#INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/external/squirrel)
- 
- ## Also execute instructions in external/tinygettext/CMakeLists.txt
- 
-@@ -248,7 +264,7 @@
- 
- include_directories (${CMAKE_BINARY_DIR}/)
- include_directories (${CMAKE_CURRENT_SOURCE_DIR}/src/)
--include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/include/)
-+#include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/squirrel/include/)
- include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/tinygettext/include/)
- include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/findlocale/)
- include_directories (${CMAKE_CURRENT_SOURCE_DIR}/external/obstack/)
-@@ -470,7 +486,7 @@
+@@ -611,8 +630,8 @@ TARGET_INCLUDE_DIRECTORIES(supertux2_lib
  TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SDL2_LIBRARIES})
  TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SDL2IMAGE_LIBRARIES})
  
--TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC squirrel)
-+TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SQUIRRELL_LIB} ${SQUIRRELL_STDLIB})
- TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC tinygettext)
+-TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC squirrel_lib)
+-TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC sqstdlib_lib)
++TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SQUIRREL_LIB})
++TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${SQUIRREL_STDLIB})
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC tinygettext_lib)
+ TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC sexp)
  TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${OPENAL_LIBRARY})
- TARGET_LINK_LIBRARIES(supertux2_lib PUBLIC ${OGGVORBIS_LIBRARIES})
+@@ -781,7 +800,11 @@ configure_file(data/levels/misc/menu.stl
+ ## CPack/Installation-specific stuff
+ 
+ INCLUDE(InstallRequiredSystemLibraries)
++if(USE_SYSTEM_SQUIRREL)
++SET(DIRS ${Boost_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR}/external/tinygettext)
++else()
+ SET(DIRS ${Boost_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR}/external/squirrel ${CMAKE_CURRENT_BINARY_DIR}/external/tinygettext)
++endif()
+ 
+ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT DISABLE_CPACK_BUNDLING)
+     SET(INFOPLIST_CFBUNDLEEXECUTABLE "SuperTux")
