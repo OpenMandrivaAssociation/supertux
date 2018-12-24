@@ -22,6 +22,7 @@ BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(SDL2_image)
 BuildRequires:	pkgconfig(SDL2_mixer)
 %if %mdvver >= 201500
