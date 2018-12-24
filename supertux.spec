@@ -1,7 +1,7 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.5.1
-Release:	2
+Version:	0.6.0
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
@@ -44,8 +44,9 @@ a similar style like the original SuperMario games.
 %{_liconsdir}/%{name}*.png
 %{_miconsdir}/%{name}*.png
 %{_datadir}/applications/%{name}2.desktop
-%{_datadir}/appdata/supertux2.appdata.xml
 %{_datadir}/pixmaps/supertux.png
+%{_datadir}/icons/hicolor/scalable/apps/supertux2.svg
+%{_datadir}/metainfo/supertux2.appdata.xml
 %attr(755,root,root) %{_gamesbindir}/%{name}2
 
 #----------------------------------------------------------------------------
