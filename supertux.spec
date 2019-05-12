@@ -14,6 +14,7 @@ Source13:	%{name}-48x48.png
 %endif
 #Patch1:		supertux-0.4.0-tinygettext-subproject.patch
 #Patch2:		supertux-0.4.0-tinygettext-subproject-install.patch
+Patch0:		supertux-0.6.0-linkage.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
@@ -54,12 +55,11 @@ a similar style like the original SuperMario games.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn SuperTux-v%{version}-Source
-%autopatch
+%autosetup -p1 -n SuperTux-v%{version}-Source
 
 %build
 %cmake \
-	-DBUILD_SHARED_LIBS=OFF \
+	-DBUILD_SHARED_LIBS:BOOL=ON \
 	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 
 %make_build

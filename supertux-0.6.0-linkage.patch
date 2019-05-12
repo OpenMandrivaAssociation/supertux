@@ -1,0 +1,12 @@
+diff -up SuperTux-v0.6.0-Source/CMakeLists.txt.omv~ SuperTux-v0.6.0-Source/CMakeLists.txt
+--- SuperTux-v0.6.0-Source/CMakeLists.txt.omv~	2019-05-12 19:33:17.956989486 +0200
++++ SuperTux-v0.6.0-Source/CMakeLists.txt	2019-05-12 19:37:40.155508976 +0200
+@@ -804,6 +804,8 @@ if(HAVE_LIBCURL)
+   endif()
+ endif(HAVE_LIBCURL)
+ 
++target_link_libraries(supertux2_lib PUBLIC boost_locale boost_filesystem)
++
+ if(BUILD_TESTS)
+   find_package(Threads REQUIRED)
+ 
