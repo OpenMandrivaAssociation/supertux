@@ -55,17 +55,17 @@ a similar style like the original SuperMario games.
 
 %prep
 %setup -qn SuperTux-v%{version}-Source
-%apply_patches
+%autopatch
 
 %build
 %cmake \
 	-DBUILD_SHARED_LIBS=OFF \
 	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 
-%make
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 rm -fr %{buildroot}%{_gamesdatadir}/doc/%{name}2-%{version}
 rm -fr %{buildroot}%{_docdir}/supertux2
