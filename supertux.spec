@@ -1,7 +1,7 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.6.0
-Release:	3
+Version:	0.6.1
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
@@ -9,11 +9,6 @@ Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/Supe
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-%if %mdvver >= 201500
-#Patch0:		supertux-0.4.0-use-system-squirrel.patch
-%endif
-#Patch1:		supertux-0.4.0-tinygettext-subproject.patch
-#Patch2:		supertux-0.4.0-tinygettext-subproject-install.patch
 Patch0:		supertux-0.6.0-linkage.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
