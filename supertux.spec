@@ -1,7 +1,7 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.6.1.1
-Release:	4supertuxsupertux
+Version:	0.6.2
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
@@ -22,9 +22,7 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(SDL2_image)
 BuildRequires:	pkgconfig(SDL2_mixer)
-%if %mdvver >= 201500
 BuildRequires:	pkgconfig(squirrel)
-%endif
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	doxygen
