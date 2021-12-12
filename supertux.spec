@@ -1,7 +1,7 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
 Version:	0.6.2
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
