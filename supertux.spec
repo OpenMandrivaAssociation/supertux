@@ -1,7 +1,7 @@
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.6.2
-Release:	4
+Version:	0.6.3
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
@@ -9,13 +9,15 @@ Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/Supe
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		supertux-0.6.0-linkage.patch
-Patch1:		supertux-0.6.1.1-add-missing-include.patch
+#Patch0:		supertux-0.6.0-linkage.patch
+#Patch1:		supertux-0.6.1.1-add-missing-include.patch
 # (tpg) game_session.cpp:165:55: error: use of undeclared identifier 'FLT_EPSILON'
-Patch2:		supertux-add-missing-include-cfloat.patch
+#Patch2:		supertux-add-missing-include-cfloat.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
+BuildRequires:	git
 BuildRequires:	physfs-devel
+BuildRequires:	pkgconfig(glm)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libcurl)
@@ -51,8 +53,7 @@ a similar style like the original SuperMario games.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n SuperTux-v%{version}-Source
-
+%autosetup -n SuperTux-v%{version}-Source -p1
 %build
 %cmake \
 	-DBUILD_SHARED_LIBS:BOOL=ON \
