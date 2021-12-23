@@ -15,6 +15,7 @@ Source13:	%{name}-48x48.png
 #Patch2:		supertux-add-missing-include-cfloat.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
+BuildRequires:	git
 BuildRequires:	physfs-devel
 BuildRequires:	pkgconfig(glm)
 BuildRequires:	pkgconfig(glew)
