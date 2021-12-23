@@ -9,7 +9,7 @@ Source0:	https://github.com/SuperTux/supertux/archive/refs/tags/v%{version}/%{na
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		supertux-0.6.0-linkage.patch
+#Patch0:		supertux-0.6.0-linkage.patch
 Patch1:		supertux-0.6.1.1-add-missing-include.patch
 # (tpg) game_session.cpp:165:55: error: use of undeclared identifier 'FLT_EPSILON'
 Patch2:		supertux-add-missing-include-cfloat.patch
