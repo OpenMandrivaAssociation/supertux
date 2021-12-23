@@ -16,6 +16,7 @@ Source13:	%{name}-48x48.png
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	physfs-devel
+BuildRequires:	pkgconfig(glm)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libcurl)
