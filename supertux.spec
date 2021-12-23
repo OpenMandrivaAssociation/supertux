@@ -51,8 +51,7 @@ a similar style like the original SuperMario games.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n SuperTux-v%{version}-Source
-
+%autosetup -p1
 %build
 %cmake \
 	-DBUILD_SHARED_LIBS:BOOL=ON \
