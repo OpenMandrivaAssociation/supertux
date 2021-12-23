@@ -5,7 +5,7 @@ Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://supertux.github.io/
-Source0:	https://github.com/SuperTux/supertux/archive/refs/tags/v%{version}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/SuperTux-v%{version}-Source.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -53,7 +53,7 @@ a similar style like the original SuperMario games.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -n SuperTux-v%{version}-Source -p1
 %build
 %cmake \
 	-DBUILD_SHARED_LIBS:BOOL=ON \
