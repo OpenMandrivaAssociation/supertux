@@ -35,6 +35,7 @@ BuildRequires:	pkgconfig(SDL2_mixer)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libssh2)
+BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	doxygen
 BuildRequires:	ninja
 
