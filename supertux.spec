@@ -13,6 +13,7 @@ Source13:	%{name}-48x48.png
 #Patch1:		supertux-0.6.1.1-add-missing-include.patch
 # (tpg) game_session.cpp:165:55: error: use of undeclared identifier 'FLT_EPSILON'
 #Patch2:		supertux-add-missing-include-cfloat.patch
+Patch3:		supertux-gcc12.patch
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	git
