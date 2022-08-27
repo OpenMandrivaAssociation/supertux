@@ -1,0 +1,12 @@
+diff -up SuperTux-v0.6.3-Source/CMakeLists.txt.omv~ SuperTux-v0.6.3-Source/CMakeLists.txt
+--- SuperTux-v0.6.3-Source/CMakeLists.txt.omv~	2022-08-27 15:40:08.296433462 +0200
++++ SuperTux-v0.6.3-Source/CMakeLists.txt	2022-08-27 15:43:16.744908102 +0200
+@@ -1025,7 +1025,7 @@ if(NOT EMSCRIPTEN)
+     if(VCPKG_BUILD)
+       target_link_libraries(supertux2_lib PUBLIC ${CURL_LIBRARIES})
+     else()
+-      target_link_libraries(supertux2_lib PUBLIC ${CURL_LIBRARY})
++      target_link_libraries(supertux2_lib PUBLIC CURL::libcurl)
+     endif()
+   endif(HAVE_LIBCURL)
+ endif(NOT EMSCRIPTEN)

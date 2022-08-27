@@ -1,3 +1,5 @@
+%bcond_without system_squirrel
+
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
 Version:	0.6.3
@@ -9,11 +11,13 @@ Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/Supe
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-#Patch0:		supertux-0.6.0-linkage.patch
-#Patch1:		supertux-0.6.1.1-add-missing-include.patch
-# (tpg) game_session.cpp:165:55: error: use of undeclared identifier 'FLT_EPSILON'
-#Patch2:		supertux-add-missing-include-cfloat.patch
+Patch0:		supertux-0.6.3-fix-libcurl-detection.patch
+Patch1:		supertux-0.6.3-fix-data-search-path.patch
 Patch3:		supertux-gcc12.patch
+%if %{with system_squirrel}
+Patch10:	supertux-0.6.3-use-system-squirrel.patch
+BuildRequires:	pkgconfig(squirrel)
+%endif
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	git
@@ -28,7 +32,6 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(SDL2_image)
 BuildRequires:	pkgconfig(SDL2_mixer)
-BuildRequires:	pkgconfig(squirrel)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	doxygen
@@ -56,9 +59,15 @@ a similar style like the original SuperMario games.
 
 %prep
 %autosetup -n SuperTux-v%{version}-Source -p1
+%if %{with system_squirrel}
+# Adapt to API changes in squirrel 3.2
+sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrapper.cpp
+%endif
+
 %build
 %cmake \
-	-DBUILD_SHARED_LIBS:BOOL=ON \
+	-DIS_SUPERTUX_RELEASE:BOOL=ON \
+	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 
 %make_build

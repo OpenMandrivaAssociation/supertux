@@ -1,0 +1,14 @@
+diff -up SuperTux-v0.6.3-Source/CMakeLists.txt.omv~ SuperTux-v0.6.3-Source/CMakeLists.txt
+--- SuperTux-v0.6.3-Source/CMakeLists.txt.omv~	2022-08-27 17:01:32.523088643 +0200
++++ SuperTux-v0.6.3-Source/CMakeLists.txt	2022-08-27 17:02:21.433422328 +0200
+@@ -59,7 +59,7 @@ include(CheckCXXCompilerFlag)
+ set(APPDATADIR "${CMAKE_INSTALL_PREFIX}/share/games/supertux2")
+ 
+ set(BUILD_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/data")
+-set(BUILD_CONFIG_DATA_DIR "${CMAKE_BINARY_DIR}/data")
++set(BUILD_CONFIG_DATA_DIR "${APPDATADIR}")
+ ## Check endianess
+ 
+ if(NOT EMSCRIPTEN)
+diff -up SuperTux-v0.6.3-Source/external/physfs/src/physfs.c.omv~ SuperTux-v0.6.3-Source/external/physfs/src/physfs.c
+diff -up SuperTux-v0.6.3-Source/src/supertux/command_line_arguments.cpp.omv~ SuperTux-v0.6.3-Source/src/supertux/command_line_arguments.cpp
