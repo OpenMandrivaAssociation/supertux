@@ -65,6 +65,8 @@ a similar style like the original SuperMario games.
 # Adapt to API changes in squirrel 3.2
 sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrapper.cpp
 %endif
+# try fix for boost 1.89
+sed -i -e 's/\<system\>//' -e 's/  */ /g' CMakeLists.txt
 
 %build
 %cmake \
