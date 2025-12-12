@@ -18,7 +18,10 @@ Patch3:		supertux-gcc12.patch
 Patch10:	supertux-0.6.3-use-system-squirrel.patch
 BuildRequires:	pkgconfig(squirrel)
 %endif
-BuildRequires:	cmake
+BuildSystem:	cmake
+BuildOption:	-DIS_SUPERTUX_RELEASE:BOOL=ON
+BuildOption:	-DBUILD_SHARED_LIBS:BOOL=OFF
+BuildOption:	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 BuildRequires:	boost-devel
 BuildRequires:	git
 BuildRequires:	physfs-devel
@@ -59,8 +62,7 @@ a similar style like the original SuperMario games.
 
 #----------------------------------------------------------------------------
 
-%prep
-%autosetup -n SuperTux-v%{version}-Source -p1
+%prep -a
 %if %{with system_squirrel}
 # Adapt to API changes in squirrel 3.2
 sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrapper.cpp
@@ -68,23 +70,9 @@ sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrap
 # try fix for boost 1.89
 sed -i -e 's/\<system\>//' -e 's/  */ /g' CMakeLists.txt
 
-%build
-%cmake \
-	-DIS_SUPERTUX_RELEASE:BOOL=ON \
-	-DBUILD_SHARED_LIBS:BOOL=OFF \
-	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
-
-%make_build
-
-%install
-%make_install -C build
-
+%install -a
 rm -fr %{buildroot}%{_gamesdatadir}/doc/%{name}2-%{version}
 rm -fr %{buildroot}%{_docdir}/supertux2
-
-%if %mdvver < 201500
-rm -f %{buildroot}%{_libdir}/libsquirrel.a
-%endif
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
