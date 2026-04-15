@@ -11,7 +11,7 @@ Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/Supe
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		supertux-0.6.3-fix-libcurl-detection.patch
+#Patch0:		supertux-0.6.3-fix-libcurl-detection.patch
 Patch1:		supertux-0.6.3-fix-data-search-path.patch
 Patch3:		supertux-gcc12.patch
 %if %{with system_squirrel}
