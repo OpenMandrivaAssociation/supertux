@@ -15,7 +15,7 @@ Source13:	%{name}-48x48.png
 #Patch1:		supertux-0.6.3-fix-data-search-path.patch
 #Patch3:		supertux-gcc12.patch
 %if %{with system_squirrel}
-Patch10:	supertux-0.6.3-use-system-squirrel.patch
+#Patch10:	supertux-0.6.3-use-system-squirrel.patch
 BuildRequires:	pkgconfig(squirrel)
 %endif
 BuildSystem:	cmake
