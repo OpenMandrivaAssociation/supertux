@@ -52,6 +52,7 @@ a similar style like the original SuperMario games.
 %defattr(644,root,root,755)
 %doc LICENSE.txt INSTALL.md README.md NEWS.md
 %{_gamesdatadir}/%{name}2
+%{_libdir}/libsimplesquirrel.so
 %{_datadir}/pixmaps/%{name}.xpm
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}*.png
