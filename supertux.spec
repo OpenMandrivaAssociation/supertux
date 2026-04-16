@@ -2,8 +2,8 @@
 
 Summary:	Classic 2D jump n run sidescroller with Tux
 Name:		supertux
-Version:	0.6.3
-Release:	16
+Version:	0.7.0
+Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		https://supertux.github.io/
@@ -11,11 +11,11 @@ Source0:	https://github.com/SuperTux/supertux/releases/download/v%{version}/Supe
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		supertux-0.6.3-fix-libcurl-detection.patch
-Patch1:		supertux-0.6.3-fix-data-search-path.patch
-Patch3:		supertux-gcc12.patch
+#Patch0:		supertux-0.6.3-fix-libcurl-detection.patch
+#Patch1:		supertux-0.6.3-fix-data-search-path.patch
+#Patch3:		supertux-gcc12.patch
 %if %{with system_squirrel}
-Patch10:	supertux-0.6.3-use-system-squirrel.patch
+#Patch10:	supertux-0.6.3-use-system-squirrel.patch
 BuildRequires:	pkgconfig(squirrel)
 %endif
 BuildSystem:	cmake
@@ -25,6 +25,7 @@ BuildOption:	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 BuildRequires:	boost-devel
 BuildRequires:	git
 BuildRequires:	physfs-devel
+BuildRequires:  pkgconfig(fmt)
 BuildRequires:	pkgconfig(glm)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
@@ -39,6 +40,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libssh2)
 BuildRequires:	pkgconfig(libidn2)
+BuildRequires:  pkgconfig(raqm)
 BuildRequires:	doxygen
 BuildRequires:	ninja
 
@@ -50,6 +52,7 @@ a similar style like the original SuperMario games.
 %defattr(644,root,root,755)
 %doc LICENSE.txt INSTALL.md README.md NEWS.md
 %{_gamesdatadir}/%{name}2
+%{_libdir}/libsimplesquirrel.so
 %{_datadir}/pixmaps/%{name}.xpm
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}*.png
@@ -57,7 +60,7 @@ a similar style like the original SuperMario games.
 %{_datadir}/applications/%{name}2.desktop
 %{_datadir}/pixmaps/supertux.png
 %{_datadir}/icons/hicolor/scalable/apps/supertux2.svg
-%{_datadir}/metainfo/supertux2.appdata.xml
+%{_datadir}/metainfo/org.supertuxproject.SuperTux.metainfo.xml
 %attr(755,root,root) %{_gamesbindir}/%{name}2
 
 #----------------------------------------------------------------------------
@@ -65,7 +68,7 @@ a similar style like the original SuperMario games.
 %prep -a
 %if %{with system_squirrel}
 # Adapt to API changes in squirrel 3.2
-sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrapper.cpp
+#sed -i -E 's|(sq_getinstanceup\(.*nullptr)(.*)|\1, false\2|g' src/scripting/wrapper.cpp
 %endif
 # try fix for boost 1.89
 sed -i -e 's/\<system\>//' -e 's/  */ /g' CMakeLists.txt
