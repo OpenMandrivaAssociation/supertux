@@ -40,6 +40,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libssh2)
 BuildRequires:	pkgconfig(libidn2)
+BuildRequires:  pkgconfig(raqm)
 BuildRequires:	doxygen
 BuildRequires:	ninja
 
@@ -58,7 +59,7 @@ a similar style like the original SuperMario games.
 %{_datadir}/applications/%{name}2.desktop
 %{_datadir}/pixmaps/supertux.png
 %{_datadir}/icons/hicolor/scalable/apps/supertux2.svg
-%{_datadir}/metainfo/supertux2.appdata.xml
+%{_datadir}/metainfo/org.supertuxproject.SuperTux.metainfo.xml
 %attr(755,root,root) %{_gamesbindir}/%{name}2
 
 #----------------------------------------------------------------------------
