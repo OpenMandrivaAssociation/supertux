@@ -25,6 +25,7 @@ BuildOption:	-DENABLE_BOOST_STATIC_LIBS:BOOL=OFF
 BuildRequires:	boost-devel
 BuildRequires:	git
 BuildRequires:	physfs-devel
+BuildRequires:  pkgconfig(fmt)
 BuildRequires:	pkgconfig(glm)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
